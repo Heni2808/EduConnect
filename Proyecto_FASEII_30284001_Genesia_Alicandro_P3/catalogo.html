@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/normalize.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <nav class="main-nav">
+            <div class="logo">
+                <span> EduConnect</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="catalogo.html">Catálogo</a>
+                <a href="mis_cursos.html">Mis Cursos</a>
+                <a href="calificaciones.html">Calificaciones</a>
+            </div>
+            <div class="user-section">
+                <div class="user-avatar" id="userAvatar">JD</div>
+                <button class="logout-btn" id="logoutBtn">Cerrar Sesión</button>
+            </div>
+        </nav>
+    </header>
+
+
+    <section class="filters-section">
+        <div class="search-box">
+            <div class="search-icon">🔍</div>
+            <input type="text" id="searchInput" placeholder="Buscar cursos...">
+        </div>
+        <div class="filter-group">
+            <button class="filter-btn active">Todos</button>
+            <button class="filter-btn">Programación</button>
+            <button class="filter-btn">Diseño</button>
+            <button class="filter-btn">Negocios</button>
+            <button class="filter-btn">Ciencia de Datos</button>
+        </div>
+    </section>
+
+
+    <main class="catalog-main">
+        <section class="catalog-title">
+            <h1>Explora Nuestros Cursos</h1>
+            <p>Amplía tus conocimientos con nuestra selección de cursos especializados</p>
+        </section>
+
+        <section class="cursos-grid" id="cursosContainer">
+            
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div>
+            <p>© 2025 Genesia A - Todos los derechos reservados</p>
+        </div>
+    </footer>
+    <script>
+        // Base de datos de cursos con rutas a sus páginas
+        const cursos = [
+            {
+                id: 1,
+                titulo: "Introducción a la Programación",
+                descripcion: "Aprende los fundamentos de la programación con ejercicios prácticos. Ideal para quienes comienzan desde cero.",
+                categoria: "Programación",
+                duracion: "8 semanas",
+                nivel: "Principiante",
+                icono: "💻",
+                inscritos: 1250,
+                ruta: "curso_programacion.html"
+            },
+            {
+                id: 2,
+                titulo: "Diseño Web Moderno",
+                descripcion: "Domina HTML, CSS y JavaScript para crear sitios web interactivos y responsivos.",
+                categoria: "Diseño",
+                duracion: "10 semanas",
+                nivel: "Intermedio",
+                icono: "🎨",
+                inscritos: 980,
+                ruta: "curso_diseno_web.html"
+            },
+            {
+                id: 3,
+                titulo: "Análisis de Datos con Python",
+                descripcion: "Utiliza Python y Pandas para analizar y visualizar datos. Aprende técnicas profesionales.",
+                categoria: "Ciencia de Datos",
+                duracion: "12 semanas",
+                nivel: "Intermedio",
+                icono: "📊",
+                inscritos: 750,
+                ruta: "curso_datos_python.html"
+            },
+            {
+                id: 4,
+                titulo: "Marketing Digital",
+                descripcion: "Estrategias efectivas para promocionar productos en línea. Desde SEO hasta redes sociales.",
+                categoria: "Negocios",
+                duracion: "6 semanas",
+                nivel: "Principiante",
+                icono: "📱",
+                inscritos: 2100,
+                ruta: "curso_marketing.html"
+            },
+            {
+                id: 5,
+                titulo: "Machine Learning Básico",
+                descripcion: "Introducción a los algoritmos de aprendizaje automático. Comprende los fundamentos de la IA.",
+                categoria: "Ciencia de Datos",
+                duracion: "14 semanas",
+                nivel: "Avanzado",
+                icono: "🤖",
+                inscritos: 520,
+                ruta: "curso_machine_learning.html"
+            },
+            {
+                id: 6,
+                titulo: "Desarrollo de Apps Móviles",
+                descripcion: "Crea aplicaciones para iOS y Android con React Native. Desde conceptos básicos hasta publicación.",
+                categoria: "Programación",
+                duracion: "10 semanas",
+                nivel: "Intermedio",
+                icono: "📱",
+                inscritos: 890,
+                ruta: "curso_apps_moviles.html"
+            },
+            {
+                id: 7,
+                titulo: "Fotografía Digital Profesional",
+                descripcion: "Domina las técnicas de composición y edición fotográfica. Conviértete en un profesional.",
+                categoria: "Diseño",
+                duracion: "8 semanas",
+                nivel: "Principiante",
+                icono: "📸",
+                inscritos: 1420,
+                ruta: "curso_fotografia.html"
+            },
+            {
+                id: 8,
+                titulo: "Gestión de Proyectos Ágiles",
+                descripcion: "Aprende metodologías ágiles para la gestión de proyectos. Scrum, Kanban y más.",
+                categoria: "Negocios",
+                duracion: "7 semanas",
+                nivel: "Intermedio",
+                icono: "📋",
+                inscritos: 670,
+                ruta: "curso_gestion_proyectos.html"
+            }
+        ];
+
+        // FUNCIONES COMUNES - INICIO
+        function obtenerIniciales(nombreCompleto) {
+            if (!nombreCompleto) return 'US';
+            return nombreCompleto.split(' ')
+                .filter(palabra => palabra.length > 0)
+                .map(palabra => palabra[0])
+                .join('')
+                .toUpperCase()
+                .substring(0, 2);
+        }
+
+        function setupCommonFunctions() {
+            // Verificar sesión
+            const usuarioActual = JSON.parse(localStorage.getItem('usuarioActual'));
+
+            if (!usuarioActual) {
+                window.location.href = 'iniciar-crear.html';
+                return;
+            }
+
+            // Actualizar avatar de usuario
+            const userAvatar = document.getElementById('userAvatar');
+            if (userAvatar) {
+                userAvatar.textContent = obtenerIniciales(usuarioActual.nombre);
+            }
+
+            // Marcar enlace activo
+            const currentPage = location.pathname.split('/').pop();
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Cerrar sesión
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    localStorage.removeItem('usuarioActual');
+                    localStorage.removeItem('sesionActiva');
+                    window.location.href = 'iniciar-crear.html';
+                });
+            }
+        }
+        // FUNCIONES COMUNES - FIN
+
+        // Función para inscribirse en un curso
+        function inscribirEnCurso(cursoId) {
+            const usuarioActual = JSON.parse(localStorage.getItem('usuarioActual'));
+            const todosUsuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+            // Si no existe el array de cursosInscritos, lo creamos
+            if (!usuarioActual.cursosInscritos) {
+                usuarioActual.cursosInscritos = [];
+            }
+
+            // Si el usuario no está inscrito, lo añadimos
+            if (!usuarioActual.cursosInscritos.includes(cursoId)) {
+                usuarioActual.cursosInscritos.push(cursoId);
+
+                // Actualizar usuarioActual en localStorage
+                localStorage.setItem('usuarioActual', JSON.stringify(usuarioActual));
+
+                // Actualizar en la lista de todos los usuarios
+                const usuarioIndex = todosUsuarios.findIndex(u => u.username === usuarioActual.username);
+                if (usuarioIndex !== -1) {
+                    todosUsuarios[usuarioIndex] = usuarioActual;
+                    localStorage.setItem('usuarios', JSON.stringify(todosUsuarios));
+                }
+
+                // Actualizar UI
+                renderizarCursos();
+                alert(`¡Inscrito exitosamente en "${cursos.find(c => c.id === cursoId).titulo}"!`);
+            } else {
+                alert('Ya estás inscrito en este curso.');
+            }
+        }
+
+        // Función para verificar si el usuario está inscrito en un curso
+        function estaInscrito(cursoId) {
+            const usuarioActual = JSON.parse(localStorage.getItem('usuarioActual'));
+            if (!usuarioActual.cursosInscritos) return false;
+            return usuarioActual.cursosInscritos.includes(cursoId);
+        }
+
+        // Función para renderizar los cursos
+        function renderizarCursos() {
+            const cursosContainer = document.getElementById('cursosContainer');
+            cursosContainer.innerHTML = '';
+
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+            const cursosFiltrados = cursos.filter(curso => {
+                const matchesSearch = curso.titulo.toLowerCase().includes(searchTerm) ||
+                    curso.descripcion.toLowerCase().includes(searchTerm) ||
+                    curso.categoria.toLowerCase().includes(searchTerm);
+                return matchesSearch;
+            });
+
+            if (cursosFiltrados.length === 0) {
+                cursosContainer.innerHTML = `
+                <div style="grid-column: 1 / -1; text-align: center; padding: 50px;">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">🔍</div>
+                    <h3>No se encontraron cursos</h3>
+                    <p>Intenta con otros términos de búsqueda</p>
+                </div>
+            `;
+                return;
+            }
+
+            cursosFiltrados.forEach(curso => {
+                const cursoCard = document.createElement('div');
+                cursoCard.className = 'curso-card';
+
+                cursoCard.innerHTML = `
+                <div class="curso-imagen">
+                    <div>${curso.icono}</div>
+                </div>
+                <div class="curso-contenido">
+                    <div class="curso-badges">
+                        <span class="curso-badge nivel">${curso.nivel}</span>
+                        <span class="curso-badge categoria">${curso.categoria}</span>
+                    </div>
+                    <h3>${curso.titulo}</h3>
+                    <p>${curso.descripcion}</p>
+                    <div class="curso-info">
+                        <span>⏱ ${curso.duracion}</span>
+                        <span>👥 ${curso.inscritos} inscritos</span>
+                    </div>
+                    ${estaInscrito(curso.id) ?
+                        `<a href="${curso.ruta}" class="btn-inscrito">Acceder al curso</a>`
+                        :
+                        `<button class="btn-inscribir" data-curso-id="${curso.id}">Inscribirse</button>`
+                    }
+                </div>
+            `;
+
+                cursosContainer.appendChild(cursoCard);
+            });
+
+            // Agregar event listeners a los botones
+            document.querySelectorAll('.btn-inscribir').forEach(boton => {
+                boton.addEventListener('click', () => {
+                    const cursoId = parseInt(boton.dataset.cursoId);
+                    inscribirEnCurso(cursoId);
+                });
+            });
+        }
+
+        // Cargar datos del usuario
+        document.addEventListener('DOMContentLoaded', () => {
+            // Configurar funciones comunes
+            setupCommonFunctions();
+
+            // Renderizar cursos
+            renderizarCursos();
+
+            // Búsqueda en tiempo real
+            document.getElementById('searchInput').addEventListener('input', renderizarCursos);
+
+            // Filtros
+            document.querySelectorAll('.filter-btn').forEach(boton => {
+                boton.addEventListener('click', function () {
+                    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const categoria = this.textContent;
+                    if (categoria === 'Todos') {
+                        renderizarCursos();
+                    } else {
+                        const cursosFiltrados = cursos.filter(curso => curso.categoria === categoria);
+                        const cursosContainer = document.getElementById('cursosContainer');
+                        cursosContainer.innerHTML = '';
+
+                        if (cursosFiltrados.length === 0) {
+                            cursosContainer.innerHTML = `
+                            <div style="grid-column: 1 / -1; text-align: center; padding: 50px;">
+                                <div style="font-size: 3rem; margin-bottom: 20px;">🔍</div>
+                                <h3>No hay cursos en esta categoría</h3>
+                                <p>Prueba con otra categoría</p>
+                            </div>
+                        `;
+                            return;
+                        }
+
+                        cursosFiltrados.forEach(curso => {
+                            const cursoCard = document.createElement('div');
+                            cursoCard.className = 'curso-card';
+
+                            cursoCard.innerHTML = `
+                            <div class="curso-imagen">
+                                <div>${curso.icono}</div>
+                            </div>
+                            <div class="curso-contenido">
+                                <div class="curso-badges">
+                                    <span class="curso-badge nivel">${curso.nivel}</span>
+                                    <span class="curso-badge categoria">${curso.categoria}</span>
+                                </div>
+                                <h3>${curso.titulo}</h3>
+                                <p>${curso.descripcion}</p>
+                                <div class="curso-info">
+                                    <span>⏱ ${curso.duracion}</span>
+                                    <span>👥 ${curso.inscritos} inscritos</span>
+                                </div>
+                                ${estaInscrito(curso.id) ?
+                                    `<a href="${curso.ruta}" class="btn-inscrito">Acceder al curso</a>`
+                                    :
+                                    `<button class="btn-inscribir" data-curso-id="${curso.id}">Inscribirse</button>`
+                                }
+                            </div>
+                        `;
+
+                            cursosContainer.appendChild(cursoCard);
+                        });
+
+                        // Agregar event listeners a los botones
+                        document.querySelectorAll('.btn-inscribir').forEach(boton => {
+                            boton.addEventListener('click', () => {
+                                const cursoId = parseInt(boton.dataset.cursoId);
+                                inscribirEnCurso(cursoId);
+                            });
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

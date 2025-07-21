@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduConnect</title>
+  <link rel="stylesheet" href="css/main.css">
+
+  <link rel="stylesheet" href="css/normalize.css">
+</head>
+
+<body class="iniciar-crear">
+  <div class="contenedor-iniciar">
+        <div class="imagen">
+            <h2>¡Bienvenido a EduConnect!</h2>
+            
+            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.9;">Usuario predeterminado: Estudiante_123<br>Contraseña: IALI-2015.</p>
+        </div>
+
+        <div class="contenido-iniciar">
+           
+            <div class="cabecera-iniciar">
+                <h1>Autenticación Segura</h1>
+                <p>Accede con tu nombre de usuario</p>
+            </div>
+
+            
+            <div id="mensajeInicioSesion" class="mensaje mensaje-exito"></div>
+            <div id="mensajeRegistro" class="mensaje mensaje-exito"></div>
+            <div id="mensajeError" class="mensaje mensaje-error"></div>
+
+            
+            <div class="panel-formularios">
+               
+                <div class="formulario" id="formularioInicioSesion">
+                    <h2>Iniciar Sesión</h2>
+                    <p>Ingresa tus credenciales para acceder</p>
+
+                    <form id="formInicioSesion">
+                        <div class="campo">
+                            <label for="usernameInicio">Nombre de Usuario</label>
+                            <input type="text" id="usernameInicio" placeholder="" required>
+                        </div>
+
+                        <div class="campo">
+                            <label for="passwordInicio">Contraseña</label>
+                            <input type="password" id="passwordInicio" placeholder="••••••••" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primario">
+                            Iniciar Sesión
+                        </button>
+                    </form>
+
+                    <div class="texto-centrado">
+                        <p>¿No tienes una cuenta? <a class="enlace" id="enlaceRegistrar">Regístrate</a></p>
+                    </div>
+                </div>
+
+                
+                <div class="formulario" id="formularioRegistro" style="display: none;">
+                    <h2>Crear Cuenta</h2>
+                    <p>Crea una nueva cuenta para comenzar</p>
+
+                    <div class="separador">
+                        <span>Registro con correo</span>
+                    </div>
+
+                    <form id="formRegistro">
+                        <div class="campo">
+                            <label for="nombreRegistro">Nombre Completo</label>
+                            <input type="text" id="nombreRegistro" placeholder="Tu nombre completo" required>
+                        </div>
+
+                        <div class="campo">
+                            <label for="emailRegistro">Correo Electrónico</label>
+                            <input type="email" id="emailRegistro" placeholder="tucorreo@ejemplo.com" required>
+                        </div>
+
+                        <div class="campo">
+                            <label for="usernameRegistro">Nombre de Usuario</label>
+                            <input type="text" id="usernameRegistro" placeholder="Elige un nombre de usuario" required>
+                        </div>
+
+                        <div class="campo">
+                            <label for="passwordRegistro">Contraseña</label>
+                            <input type="password" id="passwordRegistro" placeholder="••••••••" required>
+                        </div>
+
+                        <div class="campo">
+                            <label for="confirmarPassword">Confirmar Contraseña</label>
+                            <input type="password" id="confirmarPassword" placeholder="••••••••" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primario">
+                            Crear Cuenta
+                        </button>
+                    </form>
+
+                    <div class="texto-centrado">
+                        <p>¿Ya tienes una cuenta? <a class="enlace" id="enlaceIniciarSesion">Iniciar Sesión</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <div class="pie-pagina-iniciar">
+    <p>&copy; 2025 Alicandro G. Todos los derechos reservados.</p>
+  </div>
+
+    <script>
+        // Elementos del DOM
+        const formularioInicioSesion = document.getElementById('formularioInicioSesion');
+        const formularioRegistro = document.getElementById('formularioRegistro');
+        const enlaceRegistrar = document.getElementById('enlaceRegistrar');
+        const enlaceIniciarSesion = document.getElementById('enlaceIniciarSesion');
+        const formInicioSesion = document.getElementById('formInicioSesion');
+        const formRegistro = document.getElementById('formRegistro');
+        const mensajeInicioSesion = document.getElementById('mensajeInicioSesion');
+        const mensajeRegistro = document.getElementById('mensajeRegistro');
+        const mensajeError = document.getElementById('mensajeError');
+
+        // Alternar entre formularios
+        enlaceRegistrar.addEventListener('click', () => {
+            formularioInicioSesion.style.display = 'none';
+            formularioRegistro.style.display = 'block';
+            ocultarMensajes();
+        });
+
+        enlaceIniciarSesion.addEventListener('click', () => {
+            formularioRegistro.style.display = 'none';
+            formularioInicioSesion.style.display = 'block';
+            ocultarMensajes();
+        });
+
+        // Ocultar todos los mensajes
+        function ocultarMensajes() {
+            mensajeInicioSesion.style.display = 'none';
+            mensajeRegistro.style.display = 'none';
+            mensajeError.style.display = 'none';
+        }
+
+        // Mostrar mensaje
+        function mostrarMensaje(elemento, mensaje) {
+            ocultarMensajes();
+            elemento.textContent = mensaje;
+            elemento.style.display = 'block';
+
+            // Ocultar mensaje después de 5 segundos
+            setTimeout(() => {
+                elemento.style.display = 'none';
+            }, 5000);
+        }
+
+        // Crear o obtener lista de usuarios
+        function obtenerUsuarios() {
+            const usuariosGuardados = localStorage.getItem('usuarios');
+            return usuariosGuardados ? JSON.parse(usuariosGuardados) : [];
+        }
+
+        // Guardar nuevo usuario
+        function guardarUsuario(username, email, nombre, password) {
+            const usuarios = obtenerUsuarios();
+            
+            // Verificar si el usuario ya existe
+            if (usuarios.some(u => u.username === username)) {
+                return { success: false, message: 'El nombre de usuario ya está en uso' };
+            }
+            
+            // Verificar si el correo ya existe
+            if (usuarios.some(u => u.email === email)) {
+                return { success: false, message: 'El correo electrónico ya está registrado' };
+            }
+            
+            const nuevoUsuario = {
+                username: username,
+                email: email,
+                nombre: nombre,
+                password: password,
+                fechaRegistro: new Date().toISOString()
+            };
+            
+            usuarios.push(nuevoUsuario);
+            localStorage.setItem('usuarios', JSON.stringify(usuarios));
+            
+            return { success: true };
+        }
+
+        // Verificar credenciales usando solo username
+        function verificarCredenciales(username, password) {
+            const usuarios = obtenerUsuarios();
+            return usuarios.find(u => u.username === username && u.password === password);
+        }
+
+        // Manejar registro de nuevo usuario
+        formRegistro.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const nombre = document.getElementById('nombreRegistro').value;
+            const email = document.getElementById('emailRegistro').value;
+            const username = document.getElementById('usernameRegistro').value;
+            const password = document.getElementById('passwordRegistro').value;
+            const confirmarPassword = document.getElementById('confirmarPassword').value;
+
+            // Validar contraseñas coincidan
+            if (password !== confirmarPassword) {
+                mostrarMensaje(mensajeError, 'Las contraseñas no coinciden.');
+                return;
+            }
+
+            // Validar longitud de contraseña
+            if (password.length < 6) {
+                mostrarMensaje(mensajeError, 'La contraseña debe tener al menos 6 caracteres.');
+                return;
+            }
+
+            // Validar formato de email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                mostrarMensaje(mensajeError, 'Por favor, introduce un correo electrónico válido.');
+                return;
+            }
+
+            // Validar nombre de usuario
+            if (username.length < 3) {
+                mostrarMensaje(mensajeError, 'El nombre de usuario debe tener al menos 3 caracteres.');
+                return;
+            }
+
+            // Guardar usuario
+            const resultado = guardarUsuario(username, email, nombre, password);
+            
+            if (!resultado.success) {
+                mostrarMensaje(mensajeError, resultado.message);
+                return;
+            }
+
+            // Mostrar mensaje de éxito
+            mostrarMensaje(mensajeRegistro, `¡Registro exitoso, ${nombre}! Bienvenido/a a EduConnect.`);
+
+            // Limpiar formulario
+            formRegistro.reset();
+
+            // Cambiar a inicio de sesión después de 2 segundos
+            setTimeout(() => {
+                formularioRegistro.style.display = 'none';
+                formularioInicioSesion.style.display = 'block';
+            }, 2000);
+        });
+
+        // Manejar inicio de sesión con username
+        formInicioSesion.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById('usernameInicio').value;
+            const password = document.getElementById('passwordInicio').value;
+
+            // Validar nombre de usuario
+            if (username.length < 3) {
+                mostrarMensaje(mensajeError, 'Por favor, introduce un nombre de usuario válido.');
+                return;
+            }
+
+            // Verificar credenciales
+            const usuario = verificarCredenciales(username, password);
+            
+            if (usuario) {
+                // Guardar sesión actual
+                localStorage.setItem('usuarioActual', JSON.stringify(usuario));
+                localStorage.setItem('sesionActiva', 'true');
+                
+                mostrarMensaje(mensajeInicioSesion, `¡Bienvenido de nuevo, ${usuario.username}!`);
+
+                // Limpiar formulario
+                formInicioSesion.reset();
+                
+                // Redirigir a index.html 
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 2000);
+            } else {
+                mostrarMensaje(mensajeError, 'Credenciales incorrectas. Por favor, inténtalo de nuevo.');
+            }
+        });
+
+        // Comprobar si hay sesión activa al cargar la página
+        window.addEventListener('DOMContentLoaded', () => {
+            // Limpiar localStorage para pruebas
+            // localStorage.clear();
+            
+            // Crear usuario predeterminado si no existe
+            let usuarios = obtenerUsuarios();
+            const usuarioPredeterminadoExiste = usuarios.some(u => u.username === "Estudiante_123");
+            
+            if (!usuarioPredeterminadoExiste) {
+                usuarios.push({
+                    username: "Estudiante_123",
+                    email: "estudiante@educonnect.com",
+                    nombre: "Estudiante",
+                    password: "IALI-2015.", 
+                    
+                });
+                
+                localStorage.setItem('usuarios', JSON.stringify(usuarios));
+            } else {
+                //TUVE QUE REESCRIBIR LA CONTRASENA PORQUE LA HABIA CREADO SIN EL PUNTO FINAL//
+                const usuarioIndex = usuarios.findIndex(u => u.username === "Estudiante_123");
+                if (usuarioIndex !== -1 && usuarios[usuarioIndex].password === "IALI-2015") {
+                    usuarios[usuarioIndex].password = "IALI-2015.";
+                    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+                }
+            }
+
+            // Depuración: mostrar usuarios almacenados
+            console.log("Usuarios almacenados:", obtenerUsuarios());
+        });
+    </script>
+</body>
+
+</html>

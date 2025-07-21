@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/normalize.css">
+</head>
+
+<body>
+
+    <header class="main-header">
+        <nav class="main-nav">
+            <div class="logo">
+                <span>EduConnect</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="catalogo.html">Catálogo</a>
+                <a href="mis_cursos.html" class="active">Mis Cursos</a>
+                <a href="calificaciones.html">Calificaciones</a>
+            </div>
+            <div class="user-section">
+                <div class="user-avatar" id="userAvatar">JD</div>
+                <button class="logout-btn" id="logoutBtn">Cerrar Sesión</button>
+            </div>
+        </nav>
+    </header>
+
+
+    <section class="course-hero">
+        <div class="course-hero-content">
+            <h1>Análisis de Datos con Python</h1>
+            <p>Aprende a procesar, analizar y visualizar datos con las bibliotecas más poderosas de Python. Conviértete
+                en un experto en ciencia de datos.</p>
+
+            <div class="course-meta">
+                <div class="meta-item">
+                    <span>⏱ 14 semanas</span>
+                </div>
+                <div class="meta-item">
+                    <span>📈 Nivel: Avanzado</span>
+                </div>
+                <div class="meta-item">
+                    <span>👥 1,850 estudiantes</span>
+                </div>
+                <div class="meta-item">
+                    <span>⭐ 4.8 (420 reseñas)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <main class="course-main">
+
+        <aside class="course-sidebar">
+            <div class="sidebar-section">
+                <h3>Tu progreso</h3>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span>Progreso del curso</span>
+                        <span id="progressText">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Instructor</h3>
+                <div class="instructor-card">
+                    <div class="instructor-avatar">DR</div>
+                    <div>
+                        <h4>Dr. Roberto S</h4>
+                        <p>PhD en Ciencia de Datos</p>
+                    </div>
+                </div>
+                <p>Experto en machine learning con más de 10 años de experiencia. Ha trabajado en proyectos de análisis
+                    de datos para empresas Fortune 500.</p>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Acciones</h3>
+                <div class="course-actions">
+                    <button class="course-action-btn">
+                        <span>💻</span> Jupyter Notebooks
+                    </button>
+                    <button class="course-action-btn secondary">
+                        <span>📊</span> Conjuntos de Datos
+                    </button>
+                    <button class="course-action-btn secondary">
+                        <span>🏆</span> Solicitar certificado
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+
+        <div class="course-content">
+            <div class="course-tabs">
+                <div class="course-tab active" data-tab="contenido">Contenido del curso</div>
+                <div class="course-tab" data-tab="recursos">Recursos</div>
+                <div class="course-tab" data-tab="proyecto">Proyecto final</div>
+
+            </div>
+
+
+            <div class="tab-content active" id="contenido">
+                <h3 style="margin-bottom: 20px;">Módulos del curso</h3>
+
+                <ul class="module-list" id="moduleList">
+                    <li class="module-item" data-module="1">
+                        <div class="module-icon">
+                            <span>▶</span>
+                        </div>
+                        <div class="module-content">
+                            <h4>Módulo 1: Python para Ciencia de Datos</h4>
+                            <p>Fundamentos de Python, NumPy y entornos Jupyter</p>
+                        </div>
+                        <div class="module-duration">60 min</div>
+                    </li>
+                    <li class="module-item" data-module="2">
+                        <div class="module-icon">
+                            <span>▶</span>
+                        </div>
+                        <div class="module-content">
+                            <h4>Módulo 2: Manipulación con Pandas</h4>
+                            <p>DataFrames, limpieza y transformación de datos</p>
+                        </div>
+                        <div class="module-duration">75 min</div>
+                    </li>
+                    <li class="module-item" data-module="3">
+                        <div class="module-icon">
+                            <span>▶</span>
+                        </div>
+                        <div class="module-content">
+                            <h4>Módulo 3: Visualización con Matplotlib</h4>
+                            <p>Gráficos estáticos y personalización avanzada</p>
+                        </div>
+                        <div class="module-duration">65 min</div>
+                    </li>
+                    <li class="module-item" data-module="4">
+                        <div class="module-icon">
+                            <span>▶</span>
+                        </div>
+                        <div class="module-content">
+                            <h4>Módulo 4: Visualización con Seaborn</h4>
+                            <p>Gráficos estadísticos y visualización avanzada</p>
+                        </div>
+                        <div class="module-duration">70 min</div>
+                    </li>
+                    <li class="module-item" data-module="5">
+                        <div class="module-icon">
+                            <span>▶</span>
+                        </div>
+                        <div class="module-content">
+                            <h4>Módulo 5: Análisis Exploratorio (EDA)</h4>
+                            <p>Técnicas para explorar y entender datasets</p>
+                        </div>
+                        <div class="module-duration">80 min</div>
+                    </li>
+                    <li class="module-item" data-module="6">
+                        <div class="module-icon">
+                            <span>▶</span>
+                        </div>
+                        <div class="module-content">
+                            <h4>Módulo 6: Análisis Estadístico</h4>
+                            <p>Pruebas de hipótesis, correlaciones y regresiones</p>
+                        </div>
+                        <div class="module-duration">75 min</div>
+                    </li>
+                    <li class="module-item" data-module="7">
+                        <div class="module-icon">
+                            <span>▶</span>
+                        </div>
+                        <div class="module-content">
+                            <h4>Módulo 7: Series Temporales</h4>
+                            <p>Análisis y pronóstico de datos temporales</p>
+                        </div>
+                        <div class="module-duration">70 min</div>
+                    </li>
+                    <li class="module-item" data-module="8">
+                        <div class="module-icon">
+                            <span>📊</span>
+                        </div>
+                        <div class="module-content">
+                            <h4>Proyecto final: Análisis Completo</h4>
+                            <p>Desarrollo de un análisis de datos completo</p>
+                        </div>
+                        <div class="module-duration">150 min</div>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="tab-content" id="recursos">
+                <h3 style="margin-bottom: 20px;">Recursos del curso</h3>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <span>📄</span>
+                        </div>
+                        <h4>Guía de Pandas</h4>
+                        <p>Referencia completa de funciones y métodos</p>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <span>💾</span>
+                        </div>
+                        <h4>Conjuntos de Datos</h4>
+                        <p>Colección de datasets para practicar análisis</p>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <span>📚</span>
+                        </div>
+                        <h4>Libros Recomendados</h4>
+                        <p>Recursos avanzados de análisis de datos</p>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <span>🔍</span>
+                        </div>
+                        <h4>Casos de Estudio</h4>
+                        <p>Ejemplos reales de análisis en diferentes industrias</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; background: #e8f5e9; padding: 20px; border-radius: var(--border-radius);">
+                    <h4 style="color: var(--data-color); margin-bottom: 15px;">
+                        <span>▶</span> Video: Análisis Exploratorio con Pandas
+                    </h4>
+                    <div
+                        style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--border-radius); background: #000; margin-bottom: 20px;">
+                        <div
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #28a745 0%, #218653 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">
+                            [Video demostrativo: EDA en acción]
+                        </div>
+                    </div>
+                    <p>Aprende técnicas profesionales para explorar y entender datasets complejos con Pandas y Seaborn.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="tab-content" id="proyecto">
+                <div class="project-section">
+                    <h3><span>📊</span> Proyecto Final</h3>
+
+                    <div class="project-description">
+                        <p>Realiza un análisis completo de un dataset real. Desde la limpieza y exploración hasta la
+                            visualización y extracción de conclusiones.</p>
+
+                        <h4 style="margin-top: 20px; margin-bottom: 15px; color: var(--dark-color);">Requisitos del
+                            proyecto:</h4>
+                        <ul>
+                            <li>Selección y justificación de un dataset relevante</li>
+                            <li>Limpieza y preparación de datos</li>
+                            <li>Análisis exploratorio completo (EDA)</li>
+                            <li>Visualizaciones profesionales y significativas</li>
+                            <li>Análisis estadístico y pruebas de hipótesis</li>
+                            <li>Conclusiones y recomendaciones basadas en datos</li>
+                        </ul>
+
+                        <p style="margin-top: 20px;"><strong>Formato de entrega:</strong> Jupyter Notebook con el
+                            análisis completo y un informe ejecutivo en PDF.</p>
+
+                        <div class="deadline">
+                            <span>⚠️</span>
+                            <span>Fecha límite de entrega: 30 de Enero, 2026</span>
+                        </div>
+                    </div>
+
+                    <div class="upload-form">
+                        <h4 style="margin-bottom: 20px; color: var(--dark-color);">Entregar proyecto</h4>
+
+                        <div class="form-group">
+                            <label>Jupyter Notebook (.ipynb)</label>
+                            <div class="file-input-container" id="notebookInputContainer">
+                                <span>📓</span>
+                                <p>Arrastra tu archivo aquí o haz clic para seleccionar</p>
+                                <p style="font-size: 0.9rem;">Tamaño máximo: 20MB</p>
+                                <input type="file" class="file-input" id="notebookFile" accept=".ipynb">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Informe ejecutivo (PDF)</label>
+                            <div class="file-input-container" id="reportInputContainer">
+                                <span>📄</span>
+                                <p>Arrastra tu archivo aquí o haz clic para seleccionar</p>
+                                <p style="font-size: 0.9rem;">Tamaño máximo: 10MB</p>
+                                <input type="file" class="file-input" id="reportFile" accept=".pdf">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Comentarios adicionales</label>
+                            <textarea
+                                style="width: 100%; padding: 12px; border: 1px solid #e9ecef; border-radius: var(--border-radius); min-height: 100px;"
+                                placeholder="Describe tus hallazgos principales..."></textarea>
+                        </div>
+
+                        <button class="submit-btn" id="submitBtn">Enviar proyecto</button>
+
+                        <div class="submission-status" id="submissionStatus">
+                            <p><span>✅</span> Tu proyecto ha sido enviado con éxito.</p>
+                            <p style="margin-top: 10px;">Fecha de entrega: <span id="submissionDate"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+
+    <footer class="main-footer">
+        <div>
+            <p>© 2025 Genesia A - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <script>
+        // FUNCIONES COMUNES - INICIO
+        function obtenerIniciales(nombreCompleto) {
+            if (!nombreCompleto) return 'US';
+            return nombreCompleto.split(' ')
+                .filter(palabra => palabra.length > 0)
+                .map(palabra => palabra[0])
+                .join('')
+                .toUpperCase()
+                .substring(0, 2);
+        }
+
+        function obtenerProgresoCurso(usuario, cursoId) {
+            if (!usuario || !usuario.progresoCursos) return 0;
+            return usuario.progresoCursos[cursoId] || 0;
+        }
+
+        function actualizarProgreso(cursoId, nuevoProgreso) {
+            const usuarioActual = JSON.parse(localStorage.getItem('usuarioActual'));
+            const todosUsuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+            if (!usuarioActual) return;
+
+            if (!usuarioActual.progresoCursos) {
+                usuarioActual.progresoCursos = {};
+            }
+
+            usuarioActual.progresoCursos[cursoId] = nuevoProgreso;
+            localStorage.setItem('usuarioActual', JSON.stringify(usuarioActual));
+
+            const usuarioIndex = todosUsuarios.findIndex(u => u.username === usuarioActual.username);
+            if (usuarioIndex !== -1) {
+                todosUsuarios[usuarioIndex] = usuarioActual;
+                localStorage.setItem('usuarios', JSON.stringify(todosUsuarios));
+            }
+
+            return usuarioActual;
+        }
+
+        function setupCommonFunctions() {
+            // Verificar sesión
+            const usuarioActual = JSON.parse(localStorage.getItem('usuarioActual'));
+            if (!usuarioActual) {
+                window.location.href = 'iniciar-crear.html';
+                return;
+            }
+
+            // Actualizar avatar de usuario
+            const userAvatar = document.getElementById('userAvatar');
+            if (userAvatar) {
+                userAvatar.textContent = obtenerIniciales(usuarioActual.nombre);
+            }
+
+            // Marcar enlace activo
+            const currentPage = location.pathname.split('/').pop();
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Cerrar sesión
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    localStorage.removeItem('usuarioActual');
+                    localStorage.removeItem('sesionActiva');
+                    window.location.href = 'iniciar-crear.html';
+                });
+            }
+        }
+        // FUNCIONES COMUNES - FIN
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupCommonFunctions();
+
+            // ID del curso actual (Análisis de Datos)
+            const cursoId = 3;
+
+            // Obtener usuario actual
+            const usuarioActual = JSON.parse(localStorage.getItem('usuarioActual'));
+            if (!usuarioActual) return;
+
+            // Obtener progreso del curso
+            let progreso = obtenerProgresoCurso(usuarioActual, cursoId);
+
+            // Actualizar barra de progreso
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            if (progressFill) progressFill.style.width = `${progreso}%`;
+            if (progressText) progressText.textContent = `${progreso}%`;
+
+            // Marcar módulos completados
+            const completedModules = usuarioActual.modulosCompletados?.[cursoId] || [];
+            completedModules.forEach(moduleId => {
+                const moduleElement = document.querySelector(`.module-item[data-module="${moduleId}"]`);
+                if (moduleElement) {
+                    moduleElement.classList.add('completed');
+                    const iconSpan = moduleElement.querySelector('.module-icon span');
+                    if (iconSpan) iconSpan.textContent = '✓';
+                }
+            });
+
+            // Sistema de pestañas
+            const tabs = document.querySelectorAll('.course-tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remover clase activa de todas las pestañas y contenidos
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+
+                    // Agregar clase activa a la pestaña seleccionada
+                    tab.classList.add('active');
+
+                    // Mostrar el contenido correspondiente
+                    const tabId = tab.dataset.tab;
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            // Enviar proyecto (dos archivos: notebook e informe)
+            const submitBtn = document.getElementById('submitBtn');
+            const submissionStatus = document.getElementById('submissionStatus');
+            const submissionDate = document.getElementById('submissionDate');
+
+            if (submitBtn) {
+                submitBtn.addEventListener('click', function () {
+                    const notebookInput = document.getElementById('notebookFile');
+                    const reportInput = document.getElementById('reportFile');
+
+                    if ((!notebookInput || !notebookInput.files.length) ||
+                        (!reportInput || !reportInput.files.length)) {
+                        if (submissionStatus) {
+                            submissionStatus.className = 'submission-status error';
+                            submissionStatus.innerHTML = '<p><span>❌</span> Por favor, adjunta ambos archivos (Notebook e Informe).</p>';
+                        }
+                        return;
+                    }
+
+                    // Simular envío exitoso
+                    if (submissionStatus) {
+                        submissionStatus.className = 'submission-status success';
+                        submissionStatus.innerHTML = '<p><span>✅</span> Tu proyecto ha sido enviado con éxito.</p>';
+                    }
+
+                    // Actualizar progreso al 100% al entregar proyecto
+                    if (progreso < 100) {
+                        progreso = 100;
+                        if (progressFill) progressFill.style.width = `${progreso}%`;
+                        if (progressText) progressText.textContent = `${progreso}%`;
+                        const usuarioActualizado = actualizarProgreso(cursoId, progreso);
+
+                        // Marcar todos los módulos como completados
+                        document.querySelectorAll('.module-item').forEach(item => {
+                            item.classList.add('completed');
+                            const iconSpan = item.querySelector('.module-icon span');
+                            if (iconSpan) iconSpan.textContent = '✓';
+
+                            // Guardar módulo completado
+                            const moduleId = item.dataset.module;
+                            if (usuarioActualizado && !usuarioActualizado.modulosCompletados) {
+                                usuarioActualizado.modulosCompletados = {};
+                            }
+                            if (usuarioActualizado && !usuarioActualizado.modulosCompletados[cursoId]) {
+                                usuarioActualizado.modulosCompletados[cursoId] = [];
+                            }
+                            if (usuarioActualizado && !usuarioActualizado.modulosCompletados[cursoId].includes(parseInt(moduleId))) {
+                                usuarioActualizado.modulosCompletados[cursoId].push(parseInt(moduleId));
+                            }
+                        });
+
+                        if (usuarioActualizado) {
+                            localStorage.setItem('usuarioActual', JSON.stringify(usuarioActualizado));
+                        }
+                    }
+
+                    // Mostrar fecha y hora de entrega
+                    if (submissionDate) {
+                        const now = new Date();
+                        submissionDate.textContent = now.toLocaleString('es-ES', {
+                            day: '2-digit',
+                            month: 'long',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        });
+                    }
+
+                    // Deshabilitar botón después de envío exitoso
+                    submitBtn.disabled = true;
+                });
+            }
+
+            // Marcar módulos como completados
+            const moduleItems = document.querySelectorAll('.module-item');
+            moduleItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    const moduleId = this.dataset.module;
+
+                    // Si ya está completado, no hacer nada
+                    if (this.classList.contains('completed')) return;
+
+                    // Marcar como completado
+                    this.classList.add('completed');
+                    const iconSpan = this.querySelector('.module-icon span');
+                    if (iconSpan) iconSpan.textContent = '✓';
+
+                    // Actualizar progreso (cada módulo aporta ~12.5%)
+                    const incremento = 100 / moduleItems.length;
+                    progreso = Math.min(progreso + incremento, 100);
+
+                    // Actualizar barra de progreso
+                    if (progressFill) progressFill.style.width = `${progreso}%`;
+                    if (progressText) progressText.textContent = `${Math.round(progreso)}%`;
+
+                    // Guardar en localStorage
+                    const usuarioActualizado = actualizarProgreso(cursoId, progreso);
+
+                    // Guardar módulo completado
+                    if (usuarioActualizado) {
+                        if (!usuarioActualizado.modulosCompletados) {
+                            usuarioActualizado.modulosCompletados = {};
+                        }
+                        if (!usuarioActualizado.modulosCompletados[cursoId]) {
+                            usuarioActualizado.modulosCompletados[cursoId] = [];
+                        }
+                        if (!usuarioActualizado.modulosCompletados[cursoId].includes(parseInt(moduleId))) {
+                            usuarioActualizado.modulosCompletados[cursoId].push(parseInt(moduleId));
+                            localStorage.setItem('usuarioActual', JSON.stringify(usuarioActualizado));
+                        }
+                    }
+                });
+            });
+
+            // Manejar arrastrar y soltar archivos
+            const fileContainers = document.querySelectorAll('.file-input-container');
+            fileContainers.forEach(container => {
+                container.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    container.style.borderColor = 'var(--data-color)';
+                    container.style.backgroundColor = '#e8f5e9';
+                });
+
+                container.addEventListener('dragleave', () => {
+                    container.style.borderColor = '#e9ecef';
+                    container.style.backgroundColor = '';
+                });
+
+                container.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    container.style.borderColor = '#e9ecef';
+                    container.style.backgroundColor = '';
+
+                    const fileInput = container.querySelector('.file-input');
+                    if (e.dataTransfer.files.length && fileInput) {
+                        fileInput.files = e.dataTransfer.files;
+                        const fileNameDisplay = container.querySelector('p');
+                        if (fileNameDisplay) {
+                            fileNameDisplay.textContent = `Archivo seleccionado: ${e.dataTransfer.files[0].name}`;
+                        }
+                    }
+                });
+
+                container.addEventListener('click', () => {
+                    const fileInput = container.querySelector('.file-input');
+                    if (fileInput) {
+                        fileInput.click();
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

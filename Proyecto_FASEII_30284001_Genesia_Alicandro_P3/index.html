@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/normalize.css">
+</head>
+
+<body>
+
+    <header class="main-header">
+        <nav class="main-nav">
+            <div class="logo">
+                <span> EduConnect</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="catalogo.html">Catálogo</a>
+                <a href="mis_cursos.html">Mis Cursos</a>
+                <a href="calificaciones.html">Calificaciones</a>
+            </div>
+            <div class="user-section">
+                <div class="user-avatar" id="userAvatar">JD</div>
+                <button class="logout-btn" id="logoutBtn">Cerrar Sesión</button>
+            </div>
+        </nav>
+    </header>
+
+
+    <main class="index-main container">
+        <section class="index-welcome-section">
+            <h1 id="welcomeTitle">¡Bienvenid@!</h1>
+            <p id="welcomeSubtitle">Tu centro de aprendizaje personalizado</p>
+        </section>
+
+        <section class="index-profile-card">
+            <div class="index-user-header">
+                <div class="index-user-avatar"><img src="img/circle-user-solid.svg" alt=""></div>
+                <div class="index-user-info">
+                    <h2 id="userName"></h2>
+                    <p id="userEmail"></p>
+                </div>
+            </div>
+
+            <div class="index-details-grid">
+                <div class="index-detail-item">
+                    <h3>Fecha de Registro</h3>
+                    <p id="signupDate"</p>
+                </div>
+                <div class="index-detail-item">
+                    <h3>Cursos Inscritos</h3>
+                    <p id="enrolledCourses"></p>
+                </div>
+                <div class="index-detail-item">
+                    <h3>Último Acceso</h3>
+                    <p id="lastAccess"></p>
+                </div>
+                <div class="index-detail-item">
+                    <h3>Nivel de Aprendiz</h3>
+                    <p id="userLevel"></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="index-quick-links">
+            <a href="catalogo.html" class="index-link-card">
+                <div class="index-link-icon">📋</div>
+                <h3>Explorar Catálogo</h3>
+                <p>Descubre nuevos cursos y especializaciones</p>
+            </a>
+
+            <a href="mis_cursos.html" class="index-link-card">
+                <div class="index-link-icon">🎓</div>
+                <h3>Mis Cursos</h3>
+                <p>Continúa tu aprendizaje donde lo dejaste</p>
+            </a>
+
+            <a href="calificaciones.html" class="index-link-card">
+                <div class="index-link-icon">📊</div>
+                <h3>Calificaciones</h3>
+                <p>Revisa los resultados de tus módulos y proyectos</p>
+            </a>
+        </section>
+
+
+    </main>
+    <footer class="main-footer">
+        <div>
+            <p>© 2025 Genesia A - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+
+    <script>
+        // Función para obtener las iniciales del nombre
+        function obtenerIniciales(nombreCompleto) {
+            const iniciales = nombreCompleto.split(' ')
+                .filter(palabra => palabra.length > 0)
+                .map(palabra => palabra[0])
+                .join('')
+                .toUpperCase();
+
+            return iniciales.substring(0, 2) || 'US';
+        }
+
+        // Función para formatear fecha
+        function formatearFecha(fechaISO) {
+            try {
+                const fecha = new Date(fechaISO);
+                if (isNaN(fecha)) return "Recién registrado";
+
+                const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
+                return fecha.toLocaleDateString('es-ES', opciones);
+            } catch (e) {
+                return "Recién registrado";
+            }
+        }
+
+        // Cargar datos del usuario desde localStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            const usuarioString = localStorage.getItem('usuarioActual');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            // Verificar si hay usuario logueado
+            if (!usuarioString) {
+                window.location.href = 'iniciar-crear.html';
+                return;
+            }
+
+            try {
+                const usuarioActual = JSON.parse(usuarioString);
+
+                // Mostrar datos en el perfil
+                document.getElementById('userName').textContent = usuarioActual.nombre || usuarioActual.username;
+
+                if (usuarioActual.email) {
+                    document.getElementById('userEmail').textContent = usuarioActual.email;
+                } else {
+                    document.getElementById('userEmail').textContent = `Usuario: ${usuarioActual.username}`;
+                }
+
+                document.getElementById('userAvatar').textContent = obtenerIniciales(usuarioActual.nombre || usuarioActual.username);
+
+                // Actualizar mensaje de bienvenida
+                const primerNombre = usuarioActual.nombre ? usuarioActual.nombre.split(' ')[0] : usuarioActual.username;
+                document.getElementById('welcomeTitle').textContent = `¡Bienvenid@ de vuelta, ${primerNombre}!`;
+
+                // Fecha de registro
+                document.getElementById('signupDate').textContent = formatearFecha(usuarioActual.fechaRegistro);
+
+                // Cursos inscritos (dinámico)
+                const cursosInscritos = usuarioActual.cursosInscritos || [];
+                const numCursos = cursosInscritos.length;
+                const textoCursos = numCursos === 0 ? "Aún no tienes cursos" :
+                    numCursos === 1 ? "1 curso inscrito" :
+                        `${numCursos} cursos inscritos`;
+
+                document.getElementById('enrolledCourses').textContent = textoCursos;
+
+                // Otras informaciones
+                document.getElementById('lastAccess').textContent = 'Hoy';
+                document.getElementById('userLevel').textContent = numCursos > 2 ? 'Avanzado' :
+                    numCursos > 0 ? 'Intermedio' : 'Principiante';
+
+            } catch (e) {
+                console.error('Error cargando datos de usuario:', e);
+                window.location.href = 'inicio.html';
+            }
+
+            // Cerrar sesión
+            logoutBtn.addEventListener('click', () => {
+                localStorage.removeItem('usuarioActual');
+                localStorage.removeItem('sesionActiva');
+                window.location.href = 'inicio.html';
+            });
+        });
+
+        //SCRIPT COMUN//
+        function obtenerIniciales(nombreCompleto) {
+            if (!nombreCompleto) return 'US';
+            return nombreCompleto.split(' ')
+                .filter(palabra => palabra.length > 0)
+                .map(palabra => palabra[0])
+                .join('')
+                .toUpperCase()
+                .substring(0, 2);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Verificar sesión
+            const usuarioActual = JSON.parse(localStorage.getItem('usuarioActual'));
+
+            // Actualizar avatar de usuario
+            const userAvatar = document.getElementById('userAvatar');
+            if (userAvatar && usuarioActual) {
+                userAvatar.textContent = obtenerIniciales(usuarioActual.nombre);
+            } else if (!usuarioActual) {
+                // Si no hay usuario, redirigir a inicio de sesión
+                window.location.href = 'inicio.html';
+            }
+
+            // Marcar enlace activo
+            const currentPage = location.pathname.split('/').pop();
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Cerrar sesión
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    localStorage.removeItem('usuarioActual');
+                    localStorage.removeItem('sesionActiva');
+                    window.location.href = 'iniciar-crear.html';
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

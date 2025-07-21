@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/normalize.css">
+</head>
+
+<body class="calificaciones-body">
+    <!-- Header -->
+    <header class="main-header">
+        <nav class="main-nav">
+            <div class="logo">
+                <span>EduConnect</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="catalogo.html">Catálogo</a>
+                <a href="mis_cursos.html">Mis Cursos</a>
+                <a href="calificaciones.html" class="active">Calificaciones</a>
+            </div>
+            <div class="user-section">
+                <div class="user-avatar" id="userAvatar">JD</div>
+                <button class="logout-btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Cerrar Sesión</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1>Mis Calificaciones</h1>
+            <div id="enrolledCourses">0 cursos inscritos</div>
+        </div>
+
+        <div class="grades-container">
+            <table class="grades-table">
+                <thead>
+                    <tr>
+                        <th>Curso</th>
+                        <th>Módulo 1</th>
+                        <th>Módulo 2</th>
+                        <th>Módulo 3</th>
+                        <th>Módulo 4</th>
+                        <th>Módulo 5</th>
+                        <th>Módulo 6</th>
+                        <th>Módulo 7</th>
+                        <th>Proyecto Final</th>
+                    </tr>
+                </thead>
+                <tbody id="gradesBody">
+                    <!-- Las calificaciones se generarán aquí -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div>
+            <p>© 2025 Genesia A - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <script>
+        // FUNCIONES COMUNES - INICIO
+        function obtenerIniciales(nombreCompleto) {
+            if (!nombreCompleto) return 'US';
+            return nombreCompleto.split(' ')
+                .filter(palabra => palabra.length > 0)
+                .map(palabra => palabra[0])
+                .join('')
+                .toUpperCase()
+                .substring(0, 2);
+        }
+
+        function setupCommonFunctions() {
+            // Verificar sesión
+            const usuarioActual = JSON.parse(localStorage.getItem('usuarioActual'));
+            if (!usuarioActual) {
+                window.location.href = 'iniciar-crear.html';
+                return;
+            }
+
+            // Actualizar avatar de usuario
+            const userAvatar = document.getElementById('userAvatar');
+            if (userAvatar) {
+                userAvatar.textContent = obtenerIniciales(usuarioActual.nombre);
+            }
+
+            // Marcar enlace activo
+            const currentPage = location.pathname.split('/').pop();
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Cerrar sesión
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    localStorage.removeItem('usuarioActual');
+                    localStorage.removeItem('sesionActiva');
+                    window.location.href = 'iniciar-crear.html';
+                });
+            }
+
+            return usuarioActual;
+        }
+        // FUNCIONES COMUNES - FIN
+
+        // Cursos con diferentes módulos
+        const cursos = [
+            {
+                id: 1,
+                titulo: "Introducción a la Programación",
+                categoria: "Programación",
+                icono: "💻",
+                modulos: 6,
+                proyectoFinal: true
+            },
+            {
+                id: 2,
+                titulo: "Diseño Web Moderno",
+                categoria: "Diseño",
+                icono: "🎨",
+                modulos: 7,
+                proyectoFinal: true
+            },
+            {
+                id: 3,
+                titulo: "Análisis de Datos con Python",
+                categoria: "Ciencia de Datos",
+                icono: "📊",
+                modulos: 7,
+                proyectoFinal: true
+            },
+            {
+                id: 4,
+                titulo: "Marketing Digital",
+                categoria: "Negocios",
+                icono: "📱",
+                modulos: 5,
+                proyectoFinal: true
+            },
+            {
+                id: 5,
+                titulo: "Machine Learning Básico",
+                categoria: "Ciencia de Datos",
+                icono: "🤖",
+                modulos: 7,
+                proyectoFinal: true
+            },
+            {
+                id: 6,
+                titulo: "Desarrollo de Apps Móviles",
+                categoria: "Programación",
+                icono: "📱",
+                modulos: 7,
+                proyectoFinal: true
+            },
+            {
+                id: 7,
+                titulo: "Fotografía Digital Profesional",
+                categoria: "Diseño",
+                icono: "📸",
+                modulos: 7,
+                proyectoFinal: true
+            },
+            {
+                id: 8,
+                titulo: "Gestión de Proyectos Ágiles",
+                categoria: "Negocios",
+                icono: "📋",
+                modulos: 7,
+                proyectoFinal: true
+            }
+        ];
+
+        // Cargar datos del usuario desde localStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            // Configurar funciones comunes y obtener usuario
+            const usuarioActual = setupCommonFunctions();
+            if (!usuarioActual) return;
+
+            const enrolledCourses = document.getElementById('enrolledCourses');
+            const gradesBody = document.getElementById('gradesBody');
+
+            // Obtener cursos inscritos
+            const cursosInscritosIds = usuarioActual.cursosInscritos || [];
+            const cursosUsuario = cursos.filter(curso => cursosInscritosIds.includes(curso.id));
+            const numCursos = cursosUsuario.length;
+
+            // Actualizar número de cursos inscritos
+            const textoCursos = numCursos === 0 ? "Aún no tienes cursos" :
+                numCursos === 1 ? "1 curso inscrito" :
+                    `${numCursos} cursos inscritos`;
+            enrolledCourses.textContent = textoCursos;
+
+            // Mostrar calificaciones
+            if (numCursos === 0) {
+                gradesBody.innerHTML = `
+                <tr>
+                    <td colspan="9" style="text-align: center; padding: 40px; color: #6c757d;">
+                        <i class="fas fa-book-open" style="font-size: 3rem; margin-bottom: 15px; display: block;"></i>
+                        <h3>No tienes cursos inscritos</h3>
+                        <p>Inscríbete en un curso para comenzar tu aprendizaje</p>
+                    </td>
+                </tr>
+            `;
+            } else {
+                gradesBody.innerHTML = '';
+                cursosUsuario.forEach(curso => {
+                    const row = document.createElement('tr');
+
+                    // Crear celdas para cada módulo
+                    let modulosHtml = '';
+                    for (let i = 1; i <= 7; i++) {
+                        if (i <= curso.modulos) {
+                            modulosHtml += `<td class="not-registered">Sin registrar</td>`;
+                        } else {
+                            modulosHtml += `<td>-</td>`;
+                        }
+                    }
+
+                    // Celda para proyecto final
+                    const proyectoFinalHtml = curso.proyectoFinal ?
+                        `<td class="not-registered">Sin registrar</td>` :
+                        `<td>-</td>`;
+
+                    row.innerHTML = `
+                    <td class="course-name">${curso.titulo}</td>
+                    ${modulosHtml}
+                    ${proyectoFinalHtml}
+                `;
+
+                    gradesBody.appendChild(row);
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/normalize.css">
+</head>
+
+<body>
+
+
+    <header class="main-header">
+        <nav class="main-nav">
+            <div class="logo">
+                <span>EduConnect</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="catalogo.html">Catálogo</a>
+                <a href="mis_cursos.html">Mis Cursos</a>
+                <a href="calificaciones.html">Calificaciones</a>
+            </div>
+            <div class="user-section">
+                <div class="user-avatar" id="userAvatar">JD</div>
+                <button class="logout-btn" id="logoutBtn">Cerrar Sesión</button>
+            </div>
+        </nav>
+    </header>
+
+
+    <section class="course-hero">
+        <div class="course-hero-content">
+            <h1>Diseño Web Moderno</h1>
+            <p>Aprende a crear sitios web responsivos y atractivos con HTML5, CSS3 y JavaScript. Domina las técnicas más
+                recientes de diseño web.</p>
+
+            <div class="course-meta">
+                <div class="meta-item">
+                    <span>⏱ 12 semanas</span>
+                </div>
+                <div class="meta-item">
+                    <span>📈 Nivel: Intermedio</span>
+                </div>
+                <div class="meta-item">
+                    <span>👥 2,150 estudiantes</span>
+                </div>
+                <div class="meta-item">
+                    <span>⭐ 4.9 (380 reseñas)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <main class="course-main">
+
+        <aside class="course-sidebar">
+            <div class="sidebar-section">
+                <h3>Tu progreso</h3>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span>Progreso del curso</span>
+                        <span id="progressText">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Instructor</h3>
+                <div class="instructor-card">
+                    <div class="instructor-avatar">MP</div>
+                    <div>
+                        <h4>Marta P</h4>
+                        <p>Diseñadora Web Senior</p>
+                    </div>
+                </div>
+                <p>Con más de 8 años de experiencia en desarrollo frontend. Especialista en frameworks modernos y diseño
+                    responsivo.</p>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Acciones</h3>
+                <div class="course-actions">
+                    <button class="course-action-btn">
+                        <span>💻</span> Editor en Línea
+                    </button>
+                    <button class="course-action-btn secondary">
+                        <span>📥</span> Descargar recursos
+                    </button>
+                    <button class="course-action-btn secondary">
+                        <span>🏆</span> Solicitar certificado
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+
+        <div class="course-content">
+            <div class="course-tabs">
+                <div class="course-tab active" data-tab="contenido">Contenido del curso</div>
+                <div class="course-tab" data-tab="recursos">Recursos</div>
+                <div class="course-tab" data-tab="proyecto">Proyecto final</div>
+
+            </div>
+
+
+            <div class="tab-content active" id="contenido">
+                <h3 style="margin-bottom: 20px;">Módulos del curso</h3>
+
+                <ul class="module-list" id="moduleList">
+                    <li class="module-item" data-module="1">
+                        <div class="module-icon">
+                            <span>▶</span>
+                        </div>
+                        <div class="module-content">
+                            <h4>Módulo 1: Fundamentos de HTML5</h4>
+                            <p>Estructura semántica y elementos esenciales</p>
+                        </div>
+                        <div class="module-duration">60 min</div>
+                    </li>
+                    <li class="module-item" data-module="2">
+                        <div class="module-icon">
+                            <span>▶</span>
+                        </div>
+                        <div class="module-content">
+                            <h4>Módulo 2: CSS3 Avanzado</h4>
+                            <p>Flexbox, Grid y efectos visuales modernos</p>
+                        </div>
+                        <div class="module-duration">75 min</div>
+                    </li>
+                    <li class="module-item" data-module="3">
+                        <div class="module-icon">
+                            <span>▶</span>
+                        </div>
+                        <div class="module-content">
+                            <h4>Módulo 3: Diseño Responsivo</h4>
+                            <p>Media queries y enfoque mobile-first</p>
+                        </div>
+                        <div class="module-duration">65 min</div>
+                    </li>
+                    <li class="module-item" data-module="4">
+                        <div class="module-icon">
+                            <span>▶</span>
+                        </div>
+                        <div class="module-content">
+                            <h4>Módulo 4: JavaScript para Diseño</h4>
+                            <p>Interactividad básica y manipulación del DOM</p>
+                        </div>
+                        <div class="module-duration">80 min</div>
+                    </li>
+                    <li class="module-item" data-module="5">
+                        <div class="module-icon">
+                            <span>▶</span>
+                        </div>
+                        <div class="module-content">
+                            <h4>Módulo 5: Accesibilidad Web</h4>
+                            <p>Pautas WCAG y diseño inclusivo</p>
+                        </div>
+                        <div class="module-duration">55 min</div>
+                    </li>
+                    <li class="module-item" data-module="6">
+                        <div class="module-icon">
+                            <span>▶</span>
+                        </div>
+                        <div class="module-content">
+                            <h4>Módulo 6: Animaciones CSS</h4>
+                            <p>Transiciones, transformaciones y keyframes</p>
+                        </div>
+                        <div class="module-duration">70 min</div>
+                    </li>
+                    <li class="module-item" data-module="7">
+                        <div class="module-icon">
+                            <span>▶</span>
+                        </div>
+                        <div class="module-content">
+                            <h4>Módulo 7: Frameworks CSS</h4>
+                            <p>Introducción a Bootstrap y Tailwind</p>
+                        </div>
+                        <div class="module-duration">65 min</div>
+                    </li>
+                    <li class="module-item" data-module="8">
+                        <div class="module-icon">
+                            <span>💻</span>
+                        </div>
+                        <div class="module-content">
+                            <h4>Proyecto final: Sitio Web Completo</h4>
+                            <p>Diseño e implementación de un sitio responsivo</p>
+                        </div>
+                        <div class="module-duration">150 min</div>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="tab-content" id="recursos">
+                <h3 style="margin-bottom: 20px;">Recursos del curso</h3>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <span>📄</span>
+                        </div>
+                        <h4>Guía de Referencia HTML/CSS</h4>
+                        <p>Cheat sheet con todos los elementos y propiedades</p>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <span>🎨</span>
+                        </div>
+                        <h4>Plantillas de Diseño</h4>
+                        <p>Colección de layouts modernos para inspirarte</p>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <span>📚</span>
+                        </div>
+                        <h4>Libros Recomendados</h4>
+                        <p>Recursos avanzados para diseño web profesional</p>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <span>🔧</span>
+                        </div>
+                        <h4>Herramientas de Desarrollo</h4>
+                        <p>Lista de herramientas esenciales para diseñadores web</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; background: #f0e6ff; padding: 20px; border-radius: var(--border-radius);">
+                    <h4 style="color: var(--web-color); margin-bottom: 15px;">
+                        <span>▶</span> Video: Creando Layouts con CSS Grid
+                    </h4>
+                    <div
+                        style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--border-radius); background: #000; margin-bottom: 20px;">
+                        <div
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #6f42c1 0%, #5a2d91 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">
+                            [Video demostrativo: CSS Grid en acción]
+                        </div>
+                    </div>
+                    <p>Aprende a crear layouts complejos y responsivos con el sistema CSS Grid Layout.</p>
+                </div>
+            </div>
+
+
+            <div class="tab-content" id="proyecto">
+                <div class="project-section">
+                    <h3><span>💻</span> Proyecto Final</h3>
+
+                    <div class="project-description">
+                        <p>Crea un sitio web completo y responsivo para un negocio local o proyecto personal. Aplica
+                            todas las técnicas aprendidas durante el curso.</p>
+
+                        <h4 style="margin-top: 20px; margin-bottom: 15px; color: var(--dark-color);">Requisitos del
+                            proyecto:</h4>
+                        <ul>
+                            <li>Diseño responsivo (mobile, tablet, desktop)</li>
+                            <li>Estructura semántica HTML5</li>
+                            <li>Implementación de Flexbox o CSS Grid</li>
+                            <li>Navegación intuitiva y accesible</li>
+                            <li>Sección de contacto con formulario funcional</li>
+                            <li>Animaciones CSS para mejorar la experiencia</li>
+                        </ul>
+
+                        <p style="margin-top: 20px;"><strong>Formato de entrega:</strong> Repositorio de GitHub con el
+                            código fuente y despliegue en plataforma de hosting (Netlify, Vercel, GitHub Pages).</p>
+
+                        <div class="deadline">
+                            <span>⚠️</span>
+                            <span>Fecha límite de entrega: 25 de Enero, 2026</span>
+                        </div>
+                    </div>
+
+                    <div class="upload-form">
+                        <h4 style="margin-bottom: 20px; color: var(--dark-color);">Entregar proyecto</h4>
+
+                        <div class="form-group">
+                            <label>Enlace al repositorio de GitHub</label>
+                            <input type="text"
+                                style="width: 100%; padding: 12px; border: 1px solid #e9ecef; border-radius: var(--border-radius);"
+                                placeholder="https://github.com/tu-usuario/tu-proyecto">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Enlace al sitio en vivo</label>
+                            <input type="text"
+                                style="width: 100%; padding: 12px; border: 1px solid #e9ecef; border-radius: var(--border-radius);"
+                                placeholder="https://tu-sitio-web.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Comentarios adicionales</label>
+                            <textarea
+                                style="width: 100%; padding: 12px; border: 1px solid #e9ecef; border-radius: var(--border-radius); min-height: 100px;"
+                                placeholder="Describe tu proceso de diseño..."></textarea>
+                        </div>
+
+                        <button class="submit-btn" id="submitBtn">Enviar proyecto</button>
+
+                        <div class="submission-status" id="submissionStatus">
+                            <p><span>✅</span> Tu proyecto ha sido enviado con éxito.</p>
+                            <p style="margin-top: 10px;">Fecha de entrega: <span id="submissionDate"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div>
+            <p>© 2025 Genesia A - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <script>
+        // FUNCIONES COMUNES - INICIO
+        function obtenerIniciales(nombreCompleto) {
+            if (!nombreCompleto) return 'US';
+            return nombreCompleto.split(' ')
+                .filter(palabra => palabra.length > 0)
+                .map(palabra => palabra[0])
+                .join('')
+                .toUpperCase()
+                .substring(0, 2);
+        }
+
+        function obtenerProgresoCurso(usuario, cursoId) {
+            if (!usuario || !usuario.progresoCursos) return 0;
+            return usuario.progresoCursos[cursoId] || 0;
+        }
+
+        function actualizarProgreso(cursoId, nuevoProgreso) {
+            const usuarioActual = JSON.parse(localStorage.getItem('usuarioActual'));
+            const todosUsuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+            if (!usuarioActual) return;
+
+            if (!usuarioActual.progresoCursos) {
+                usuarioActual.progresoCursos = {};
+            }
+
+            usuarioActual.progresoCursos[cursoId] = nuevoProgreso;
+            localStorage.setItem('usuarioActual', JSON.stringify(usuarioActual));
+
+            const usuarioIndex = todosUsuarios.findIndex(u => u.username === usuarioActual.username);
+            if (usuarioIndex !== -1) {
+                todosUsuarios[usuarioIndex] = usuarioActual;
+                localStorage.setItem('usuarios', JSON.stringify(todosUsuarios));
+            }
+
+            return usuarioActual;
+        }
+
+        function setupCommonFunctions() {
+            // Verificar sesión
+            const usuarioActual = JSON.parse(localStorage.getItem('usuarioActual'));
+            if (!usuarioActual) {
+                window.location.href = 'iniciar-crear.html';
+                return;
+            }
+
+            // Actualizar avatar de usuario
+            const userAvatar = document.getElementById('userAvatar');
+            if (userAvatar) {
+                userAvatar.textContent = obtenerIniciales(usuarioActual.nombre);
+            }
+
+            // Marcar enlace activo
+            const currentPage = location.pathname.split('/').pop();
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Cerrar sesión
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    localStorage.removeItem('usuarioActual');
+                    localStorage.removeItem('sesionActiva');
+                    window.location.href = 'iniciar-crear.html';
+                });
+            }
+        }
+        // FUNCIONES COMUNES - FIN
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupCommonFunctions();
+
+            // ID del curso actual (Diseño Web)
+            const cursoId = 2;
+
+            // Obtener usuario actual
+            const usuarioActual = JSON.parse(localStorage.getItem('usuarioActual'));
+            if (!usuarioActual) return;
+
+            // Obtener progreso del curso
+            let progreso = obtenerProgresoCurso(usuarioActual, cursoId);
+
+            // Actualizar barra de progreso
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            if (progressFill) progressFill.style.width = `${progreso}%`;
+            if (progressText) progressText.textContent = `${progreso}%`;
+
+            // Marcar módulos completados
+            const completedModules = usuarioActual.modulosCompletados?.[cursoId] || [];
+            completedModules.forEach(moduleId => {
+                const moduleElement = document.querySelector(`.module-item[data-module="${moduleId}"]`);
+                if (moduleElement) {
+                    moduleElement.classList.add('completed');
+                    const iconSpan = moduleElement.querySelector('.module-icon span');
+                    if (iconSpan) iconSpan.textContent = '✓';
+                }
+            });
+
+            // Sistema de pestañas
+            const tabs = document.querySelectorAll('.course-tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remover clase activa de todas las pestañas y contenidos
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+
+                    // Agregar clase activa a la pestaña seleccionada
+                    tab.classList.add('active');
+
+                    // Mostrar el contenido correspondiente
+                    const tabId = tab.dataset.tab;
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            // Enviar proyecto (mediante enlace de GitHub)
+            const submitBtn = document.getElementById('submitBtn');
+            const submissionStatus = document.getElementById('submissionStatus');
+            const submissionDate = document.getElementById('submissionDate');
+
+            if (submitBtn) {
+                submitBtn.addEventListener('click', function () {
+                    const repoInput = document.querySelector('input[type="text"]');
+                    if (!repoInput || !repoInput.value) {
+                        if (submissionStatus) {
+                            submissionStatus.className = 'submission-status error';
+                            submissionStatus.innerHTML = '<p><span>❌</span> Por favor, ingresa el enlace a tu repositorio de GitHub.</p>';
+                        }
+                        return;
+                    }
+
+                    // Simular envío exitoso
+                    if (submissionStatus) {
+                        submissionStatus.className = 'submission-status success';
+                        submissionStatus.innerHTML = '<p><span>✅</span> Tu proyecto ha sido enviado con éxito.</p>';
+                    }
+
+                    // Actualizar progreso al 100% al entregar proyecto
+                    if (progreso < 100) {
+                        progreso = 100;
+                        if (progressFill) progressFill.style.width = `${progreso}%`;
+                        if (progressText) progressText.textContent = `${progreso}%`;
+                        const usuarioActualizado = actualizarProgreso(cursoId, progreso);
+
+                        // Marcar todos los módulos como completados
+                        document.querySelectorAll('.module-item').forEach(item => {
+                            item.classList.add('completed');
+                            const iconSpan = item.querySelector('.module-icon span');
+                            if (iconSpan) iconSpan.textContent = '✓';
+
+                            // Guardar módulo completado
+                            const moduleId = item.dataset.module;
+                            if (usuarioActualizado && !usuarioActualizado.modulosCompletados) {
+                                usuarioActualizado.modulosCompletados = {};
+                            }
+                            if (usuarioActualizado && !usuarioActualizado.modulosCompletados[cursoId]) {
+                                usuarioActualizado.modulosCompletados[cursoId] = [];
+                            }
+                            if (usuarioActualizado && !usuarioActualizado.modulosCompletados[cursoId].includes(parseInt(moduleId))) {
+                                usuarioActualizado.modulosCompletados[cursoId].push(parseInt(moduleId));
+                            }
+                        });
+
+                        if (usuarioActualizado) {
+                            localStorage.setItem('usuarioActual', JSON.stringify(usuarioActualizado));
+                        }
+                    }
+
+                    // Mostrar fecha y hora de entrega
+                    if (submissionDate) {
+                        const now = new Date();
+                        submissionDate.textContent = now.toLocaleString('es-ES', {
+                            day: '2-digit',
+                            month: 'long',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        });
+                    }
+
+                    // Deshabilitar botón después de envío exitoso
+                    submitBtn.disabled = true;
+                });
+            }
+
+            // Marcar módulos como completados
+            const moduleItems = document.querySelectorAll('.module-item');
+            moduleItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    const moduleId = this.dataset.module;
+
+                    // Si ya está completado, no hacer nada
+                    if (this.classList.contains('completed')) return;
+
+                    // Marcar como completado
+                    this.classList.add('completed');
+                    const iconSpan = this.querySelector('.module-icon span');
+                    if (iconSpan) iconSpan.textContent = '✓';
+
+                    // Actualizar progreso (cada módulo aporta ~12.5%)
+                    const incremento = 100 / moduleItems.length;
+                    progreso = Math.min(progreso + incremento, 100);
+
+                    // Actualizar barra de progreso
+                    if (progressFill) progressFill.style.width = `${progreso}%`;
+                    if (progressText) progressText.textContent = `${Math.round(progreso)}%`;
+
+                    // Guardar en localStorage
+                    const usuarioActualizado = actualizarProgreso(cursoId, progreso);
+
+                    // Guardar módulo completado
+                    if (usuarioActualizado) {
+                        if (!usuarioActualizado.modulosCompletados) {
+                            usuarioActualizado.modulosCompletados = {};
+                        }
+                        if (!usuarioActualizado.modulosCompletados[cursoId]) {
+                            usuarioActualizado.modulosCompletados[cursoId] = [];
+                        }
+                        if (!usuarioActualizado.modulosCompletados[cursoId].includes(parseInt(moduleId))) {
+                            usuarioActualizado.modulosCompletados[cursoId].push(parseInt(moduleId));
+                            localStorage.setItem('usuarioActual', JSON.stringify(usuarioActualizado));
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
