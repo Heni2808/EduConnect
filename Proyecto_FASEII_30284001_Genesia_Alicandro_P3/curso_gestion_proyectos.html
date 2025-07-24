@@ -311,7 +311,7 @@
 
                         <button class="submit-btn" id="submitBtn">Enviar proyecto</button>
 
-                        <div class="submission-status" id="submissionStatus">
+                        <div class="submission-status" id="submissionStatus" style="display: none;">
                             <p><span>✅</span> Tu proyecto ha sido enviado con éxito.</p>
                             <p style="margin-top: 10px;">Fecha de entrega: <span id="submissionDate"></span></p>
                         </div>
@@ -459,6 +459,7 @@
                     const pdfInput = document.getElementById('pdfFile');
                     if (!pdfInput || !pdfInput.files.length) {
                         if (submissionStatus) {
+                            submissionStatus.style.display = 'block';
                             submissionStatus.className = 'submission-status error';
                             submissionStatus.innerHTML = '<p><span>❌</span> Por favor, adjunta el documento de planificación (PDF).</p>';
                         }
@@ -467,51 +468,25 @@
 
                     // Simular envío exitoso
                     if (submissionStatus) {
+                        submissionStatus.style.display = 'block';
                         submissionStatus.className = 'submission-status success';
-                        submissionStatus.innerHTML = '<p><span>✅</span> Tu proyecto ha sido enviado con éxito.</p>';
-                    }
+                        submissionStatus.innerHTML = `
+                    <p><span>✅</span> Tu proyecto ha sido enviado con éxito.</p>
+                    <p style="margin-top: 10px;">Fecha de entrega: <span id="submissionDate"></span></p>
+                `;
 
-                    // Actualizar progreso al 100% al entregar proyecto
-                    if (progreso < 100) {
-                        progreso = 100;
-                        if (progressFill) progressFill.style.width = `${progreso}%`;
-                        if (progressText) progressText.textContent = `${progreso}%`;
-                        const usuarioActualizado = actualizarProgreso(cursoId, progreso);
-
-                        // Marcar todos los módulos como completados
-                        document.querySelectorAll('.module-item').forEach(item => {
-                            item.classList.add('completed');
-                            const iconSpan = item.querySelector('.module-icon span');
-                            if (iconSpan) iconSpan.textContent = '✓';
-
-                            // Guardar módulo completado
-                            const moduleId = item.dataset.module;
-                            if (usuarioActualizado && !usuarioActualizado.modulosCompletados) {
-                                usuarioActualizado.modulosCompletados = {};
-                            }
-                            if (usuarioActualizado && !usuarioActualizado.modulosCompletados[cursoId]) {
-                                usuarioActualizado.modulosCompletados[cursoId] = [];
-                            }
-                            if (usuarioActualizado && !usuarioActualizado.modulosCompletados[cursoId].includes(parseInt(moduleId))) {
-                                usuarioActualizado.modulosCompletados[cursoId].push(parseInt(moduleId));
-                            }
-                        });
-
-                        if (usuarioActualizado) {
-                            localStorage.setItem('usuarioActual', JSON.stringify(usuarioActualizado));
+                        // Actualizar la fecha usando la nueva referencia
+                        const newSubmissionDate = document.getElementById('submissionDate');
+                        if (newSubmissionDate) {
+                            const now = new Date();
+                            newSubmissionDate.textContent = now.toLocaleString('es-ES', {
+                                day: '2-digit',
+                                month: 'long',
+                                year: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit'
+                            });
                         }
-                    }
-
-                    // Mostrar fecha y hora de entrega
-                    if (submissionDate) {
-                        const now = new Date();
-                        submissionDate.textContent = now.toLocaleString('es-ES', {
-                            day: '2-digit',
-                            month: 'long',
-                            year: 'numeric',
-                            hour: '2-digit',
-                            minute: '2-digit'
-                        });
                     }
 
                     // Deshabilitar botón después de envío exitoso
